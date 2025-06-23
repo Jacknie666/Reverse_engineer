@@ -1,0 +1,43 @@
+2.1Utils
+ 总结一些常见的可以提高爬虫效率的工具箱，包括常见的文本格式处理、时间格式处理、请求头格式化，以及爬虫智能解析库等。
+|https://spidertools.cn|爬虫工具库|
+|https://www.json.cn/|Json 解析网站|
+|https://base64.us/|Base64 编码解码|
+|https://www.runoob.com/runcode|Html 代码转页面|
+|https://alisen39.com/|httpRaw 转 Python|
+|http://httpbin.org/get|查看本地请求信息|
+|http://tool.chinaz.com/tools/unicode.aspx|站长工具编码解码集合|
+|http://web.chacuo.net/netproxycheck|代理服务器连接测试工具|
+|http://tool.yuanrenxue.com/|爬虫分析工具|
+2.1.1爬虫工具包
+  lxpy库是开发时常用的工具进行集成的一个工具库，包括时间处理，xml检验，html去除，json格式化，正则xpath，生成随机UA，请求头字符转字典处理方法
+安装方法：pip install lxpy
+2.1.2智能解析库
+  在做网络舆情爬虫的时候，通常需要大规模的采集新闻网站和论文博客的文章正文。假设有1000个不同规则的页面，如果手动去写re，xpath，bs4这些页面解析方法，就需要写1000次，这些对开发成本和
+人力成本是巨大的挑战。
+  为了解决这个问题，目前有三种页面智能解析方式：基于文档内容的提取方式，基于DOM节点的提取方式，基于视觉信息的提取方式。下面介绍俩个智能解析库
+1.Nespaper
+Github:https://Github.com/codelucas/newspaper该页面基于页面html标签DOM节点的正文内容提取方式
+2.GeneralNewExtrator
+Github:https//Github.com/codelucas/newspaper这是一种基于网页文本密度与符号进行正文内容提取的内容
+2.2Scrapy
+  Scrapy是基于twisted的多线程爬虫框架。首先twisted是异步网络请求框架，Scrapy在请求时采用的是异步请求策略，而在处理事使用的是多线程模式
+2.2.1Scrapy框架
+   Scrapy的处理核心处理流程由五大模块构成，分别是调度器（Scheduler）、下载器(Downloader)、爬虫(Sipders)、实体管道（Item Pineline）和引擎（Scrapy Engine）
+  引擎是整个爬虫框架的核心，它用于控制调试器、下载器、爬虫、相当于计算机的cpu。调度器相当于任务中心，可以假设URL的优先队列，由它来决定采集目标，同时支持目标去重。
+  下载器即是根据抓取目标从网络上下载资源，下载器基于twisted异步框架上的，保障采集的效率与稳定性
+  Scrapy的工作流程如下：
+  （1）将网站传递给Scrapy引擎
+  （2）Scrapy引擎将网址传给下载中间件
+  （3）下载中间件将网址给下载器
+  （4）下载器向网址发起Request请求进行下载
+  （5）网址接收请求，将响应返回给下载器
+  （6）下载器将收到的响应返回给下载中间件
+  （7）下载中间件与Scrapy引擎通讯
+  （8）Scrapy将response响应信息传递给爬虫中间件
+  （9）爬虫中间件将处理后的信息传递给爬虫进行处理
+   (10)爬虫处理后，会提取出数据和新的请求信息，将处理后的信息传递给爬虫中间件
+   (11)爬虫中间件将处理后的信息传递给Scrapy引擎
+  （12）Scrapy接受到信息后，会将项目实体传递给实体管道进一步处理，同时将新的信息传递给调度器
+  （13）重复1～12步，直到无异常
+2.2.2Scrapy
